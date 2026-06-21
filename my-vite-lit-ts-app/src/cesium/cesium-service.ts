@@ -4,26 +4,17 @@ class CesiumService {
   private static instance: CesiumService;
   private viewer?: Cesium.Viewer;
 
-  private constructor() {}
-
-  static getInstance(): CesiumService {
+  static getInstance() {
     if (!CesiumService.instance) {
       CesiumService.instance = new CesiumService();
     }
     return CesiumService.instance;
   }
 
-  /**
-   * Initialisiert Cesium nur EINMAL
-   */
-  init(containerId: string): Cesium.Viewer {
-    if (this.viewer) {
-      return this.viewer;
-    }
+  init(containerId: string) {
+    if (this.viewer) return this.viewer;
 
     this.viewer = new Cesium.Viewer(containerId, {
-      sceneMode: Cesium.SceneMode.SCENE3D,
-
       animation: false,
       timeline: false,
       geocoder: false,
@@ -33,32 +24,45 @@ class CesiumService {
       baseLayerPicker: false,
       fullscreenButton: false,
       infoBox: false,
-      selectionIndicator: false,
-
-      shouldAnimate: true,
-      requestRenderMode: true,
-      maximumRenderTimeChange: Infinity
+      selectionIndicator: false
     });
 
     return this.viewer;
   }
 
-  /**
-   * Zugriff auf Viewer überall in der App
-   */
-  getViewer(): Cesium.Viewer {
-    if (!this.viewer) {
-      throw new Error('Cesium Viewer not initialized. Call init() first.');
-    }
+  private getViewer() {
+    if (!this.viewer) throw new Error('Viewer not initialized');
     return this.viewer;
   }
 
-  /**
-   * Safe cleanup
-   */
-  destroy(): void {
-    this.viewer?.destroy();
-    this.viewer = undefined;
+  // 🎯 CAMERA ACTIONS
+
+  flyToBern() {
+    this.getViewer().camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(7.4474, 46.9480, 15000)
+    });
+  }
+
+  flyToNewYork() {
+    this.getViewer().camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(-74.0060, 40.7128, 20000)
+    });
+  }
+
+  zoomIn() {
+    this.getViewer().camera.zoomIn(50000);
+  }
+
+  zoomOut() {
+    this.getViewer().camera.zoomOut(50000);
+  }
+
+  rotateLeft() {
+    this.getViewer().camera.rotateLeft(Cesium.Math.toRadians(10));
+  }
+
+  rotateRight() {
+    this.getViewer().camera.rotateRight(Cesium.Math.toRadians(10));
   }
 }
 

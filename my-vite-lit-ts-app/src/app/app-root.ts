@@ -2,6 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
 import '@/components/cesium-viewer';
+import { cesiumService } from '@/cesium/cesium-service';
 
 @customElement('app-root')
 export class AppRoot extends LitElement {
@@ -10,46 +11,106 @@ export class AppRoot extends LitElement {
     return this;
   }
 
-render() {
-  return html`
-    <header>
-      <h1>My Cesium App</h1>
-    </header>
+  render() {
+    return html`
+      <header>
+        <h3>Cesium GIS</h3>
+      </header>
 
-    <div class="content">
-      <cesium-viewer></cesium-viewer>
-    </div>
+      <div class="layout">
+        <aside class="sidebar">
 
-    <style>
-      :host {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        width: 100vw;
-      }
+          <h4>Camera Controls</h4>
 
-      header {
-        height: 60px;
-        display: flex;
-        align-items: center;
-        padding: 0 16px;
-        background: #baf36a;
-        color: white;
-        flex-shrink: 0;
-      }
+          <button @click=${() => cesiumService.flyToBern()}>
+            Fly to Bern 🇨🇭
+          </button>
 
-      .content {
-        flex: 1;
-        display: flex;
-        overflow: hidden;
-        min-height: 0; /* important for flex children to not overflow */
-      }
-       canvas {
-        display: block; /* removes default inline-block spacing */
-        width: 100%;
-      }
+          <button @click=${() => cesiumService.flyToNewYork()}>
+            Fly to New York 🗽
+          </button>
 
-    </style>
-  `;
-}
+          <hr />
+
+          <button @click=${() => cesiumService.zoomIn()}>
+            Zoom In +
+          </button>
+
+          <button @click=${() => cesiumService.zoomOut()}>
+            Zoom Out -
+          </button>
+
+          <hr />
+
+          <button @click=${() => cesiumService.rotateLeft()}>
+            Rotate Left ⟲
+          </button>
+
+          <button @click=${() => cesiumService.rotateRight()}>
+            Rotate Right ⟳
+          </button>
+
+        </aside>
+
+        <main class="map">
+          <cesium-viewer></cesium-viewer>
+        </main>
+      </div>
+
+      <style>
+        :host {
+          display: flex;
+          flex-direction: column;
+          height: 100vh;
+        }
+
+        header {
+          height: 56px;
+          background: #111;
+          color: white;
+          display: flex;
+          align-items: center;
+          padding: 0 12px;
+        }
+
+        .layout {
+          flex: 1;
+          display: flex;
+          min-height: 0;
+        }
+
+        .sidebar {
+          width: 240px;
+          background: #1e1e1e;
+          color: white;
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        button {
+          padding: 8px;
+          cursor: pointer;
+          background: #333;
+          color: white;
+          border: none;
+        }
+
+        button:hover {
+          background: #444;
+        }
+
+        .map {
+          flex: 1;
+        }
+
+        canvas {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+      </style>
+    `;
+  }
 }
