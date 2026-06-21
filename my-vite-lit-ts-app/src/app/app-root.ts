@@ -3,6 +3,7 @@ import { customElement } from 'lit/decorators.js';
 
 import '@/components/cesium-viewer';
 import { cesiumService } from '@/cesium/cesium-service';
+import '@/components/lighting-controls';
 
 @customElement('app-root')
 export class AppRoot extends LitElement {
