@@ -4,7 +4,6 @@ import { cesiumService } from '@/cesium/cesium-service';
 
 @customElement('cesium-viewer')
 export class CesiumViewer extends LitElement {
-
   createRenderRoot() {
     return this;
   }
@@ -18,16 +17,16 @@ export class CesiumViewer extends LitElement {
     super.disconnectedCallback();
   }
 
-    render() {
+  render() {
     return html`
-        <div id="cesiumContainer"></div>
+      <div id="cesiumContainer"></div>
 
-        <style>
+      <style>
         #cesiumContainer {
-            width: 100%;
-            height: 100%;
+          width: 100%;
+          height: 100%;
         }
-        </style>
+      </style>
     `;
-    }
+  }
 }

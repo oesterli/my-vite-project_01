@@ -7,7 +7,6 @@ import '@/components/lighting-controls';
 
 @customElement('app-root')
 export class AppRoot extends LitElement {
-
   createRenderRoot() {
     return this;
   }
@@ -20,37 +19,23 @@ export class AppRoot extends LitElement {
 
       <div class="layout">
         <aside class="sidebar">
-
           <h4>Camera Controls</h4>
 
-          <button @click=${() => cesiumService.flyToBern()}>
-            Fly to Bern 🇨🇭
-          </button>
+          <button @click=${() => cesiumService.flyToBern()}>Fly to Bern 🇨🇭</button>
 
-          <button @click=${() => cesiumService.flyToNewYork()}>
-            Fly to New York 🗽
-          </button>
+          <button @click=${() => cesiumService.flyToNewYork()}>Fly to New York 🗽</button>
 
           <hr />
 
-          <button @click=${() => cesiumService.zoomIn()}>
-            Zoom In +
-          </button>
+          <button @click=${() => cesiumService.zoomIn()}>Zoom In +</button>
 
-          <button @click=${() => cesiumService.zoomOut()}>
-            Zoom Out -
-          </button>
+          <button @click=${() => cesiumService.zoomOut()}>Zoom Out -</button>
 
           <hr />
 
-          <button @click=${() => cesiumService.rotateLeft()}>
-            Rotate Left ⟲
-          </button>
+          <button @click=${() => cesiumService.rotateLeft()}>Rotate Left ⟲</button>
 
-          <button @click=${() => cesiumService.rotateRight()}>
-            Rotate Right ⟳
-          </button>
-
+          <button @click=${() => cesiumService.rotateRight()}>Rotate Right ⟳</button>
         </aside>
 
         <main class="map">

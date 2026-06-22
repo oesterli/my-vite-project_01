@@ -4,7 +4,6 @@ import { cesiumService } from '@/cesium/cesium-service';
 
 @customElement('lighting-controls')
 export class LightingControls extends LitElement {
-
   createRenderRoot() {
     return this;
   }
@@ -45,70 +44,70 @@ export class LightingControls extends LitElement {
 
   render() {
     return html`
-      <div
-        class="panel"
-        style="left:${this.x}px; top:${this.y}px"
-      >
-
+      <div class="panel" style="left:${this.x}px; top:${this.y}px">
         <!-- HEADER (drag handle) -->
-        <div class="header"
-          @mousedown=${this.onMouseDown}
-        >
-          ⚙️ Lighting Controls
-        </div>
+        <div class="header" @mousedown=${this.onMouseDown}>⚙️ Lighting Controls</div>
 
         <!-- CONTENT -->
         <div class="content">
-
-         <label>
-            <input type="checkbox"
-              @change=${(e: any) =>
-                cesiumService.setAtmosphere(e.target.checked)}>
+          <label>
+            <input
+              type="checkbox"
+              @change=${(e: any) => cesiumService.setAtmosphere(e.target.checked)}
+            />
             Atmosphere
           </label>
 
-         <label>
-            <input type="checkbox"
-              @change=${(e: any) =>
-                cesiumService.setFog(e.target.checked)}>
+          <label>
+            <input type="checkbox" @change=${(e: any) => cesiumService.setFog(e.target.checked)} />
             Fog
-         </label>
+          </label>
 
           <label>
             Fog Strength
-            <input type="range" min="0" max="0.01" step="0.001"
-              @input=${(e: any) =>
-                cesiumService.setFogStrength(parseFloat(e.target.value))}>
+            <input
+              type="range"
+              min="0"
+              max="0.01"
+              step="0.001"
+              @input=${(e: any) => cesiumService.setFogStrength(parseFloat(e.target.value))}
+            />
           </label>
 
-         <label>
-            <input type="checkbox"
-              @change=${(e: any) =>
-                cesiumService.setHDR(e.target.checked)}>
+          <label>
+            <input type="checkbox" @change=${(e: any) => cesiumService.setHDR(e.target.checked)} />
             HDR
           </label>
 
           <label>
-            <input type="checkbox"
-              @change=${(e: any) =>
-                cesiumService.setLighting(e.target.checked)}>
+            <input
+              type="checkbox"
+              @change=${(e: any) => cesiumService.setLighting(e.target.checked)}
+            />
             Lighting
           </label>
 
           <label>
             Gamma
-            <input type="range" min="0.5" max="3" step="0.1"
-              @input=${(e: any) =>
-                cesiumService.setGamma(parseFloat(e.target.value))}>
+            <input
+              type="range"
+              min="0.5"
+              max="3"
+              step="0.1"
+              @input=${(e: any) => cesiumService.setGamma(parseFloat(e.target.value))}
+            />
           </label>
 
           <label>
             Brightness
-            <input type="range" min="0" max="3" step="0.1"
-              @input=${(e: any) =>
-                cesiumService.setBrightness(parseFloat(e.target.value))}>
+            <input
+              type="range"
+              min="0"
+              max="3"
+              step="0.1"
+              @input=${(e: any) => cesiumService.setBrightness(parseFloat(e.target.value))}
+            />
           </label>
-
         </div>
       </div>
 
@@ -119,7 +118,7 @@ export class LightingControls extends LitElement {
           background: #b2efb5;
           color: black;
           border-radius: 6px;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
           user-select: none;
         }
 
@@ -149,7 +148,7 @@ export class LightingControls extends LitElement {
           font-size: 12px;
         }
 
-        input[type="range"] {
+        input[type='range'] {
           width: 100%;
         }
       </style>
