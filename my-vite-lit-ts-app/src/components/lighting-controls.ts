@@ -9,7 +9,7 @@ export class LightingControls extends LitElement {
     return this;
   }
 
-  @state() private x = 20;
+  @state() private x = 1230;
   @state() private y = 80;
 
   @state() private dragging = false;
