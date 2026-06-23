@@ -71,7 +71,7 @@ class CesiumService {
     return this.viewer;
   }
 
-  //
+  // Lighting and Scene Settings
   setLighting(enabled: boolean) {
     const viewer = this.getViewer();
     viewer.scene.globe.enableLighting = enabled;
