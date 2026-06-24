@@ -4,6 +4,7 @@ import { customElement } from 'lit/decorators.js';
 import '@/components/cesium-viewer';
 import { cesiumService } from '@/cesium/cesium-service';
 import '@/components/lighting-controls';
+import '@/components/my-component';
 
 @customElement('app-root')
 export class AppRoot extends LitElement {
@@ -16,6 +17,10 @@ export class AppRoot extends LitElement {
       <header>
         <h3>Cesium GIS</h3>
       </header>
+
+      <div>
+        <my-component></my-component>
+      </div>
 
       <div class="layout">
         <aside class="sidebar">
