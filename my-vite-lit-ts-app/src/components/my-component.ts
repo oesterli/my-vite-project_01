@@ -2,6 +2,7 @@ import { LitElement, css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 
 import '@/components/my-inner-component';
+import '@/components/my-inner-slot-component';
 
 @customElement('my-component')
 export class MyComponent extends LitElement {
@@ -9,7 +10,7 @@ export class MyComponent extends LitElement {
   //   return this;
   // }
 
-  @state() private x = 300;
+  @state() private x = 1230;
   @state() private y = 100;
 
   @state() private dragging = false;

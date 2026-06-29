@@ -1,7 +1,7 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 
-import '@/components/my-inner-slot-component';
+import '@/components/my-arrow';
 
 @customElement('my-inner-component')
 export class MyInnerComponent extends LitElement {
@@ -25,6 +25,7 @@ export class MyInnerComponent extends LitElement {
     return html` <div class="content-01">
       Hello from my-inner-component.ts
       <slot></slot>
+      <my-arrow></my-arrow>
     </div>`;
   }
 }
