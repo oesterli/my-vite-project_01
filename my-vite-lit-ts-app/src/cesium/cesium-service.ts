@@ -26,44 +26,43 @@ class CesiumService {
       baseLayerPicker: false,
       fullscreenButton: false,
       infoBox: false,
-      selectionIndicator: false
+      selectionIndicator: false,
     });
 
-      // 👉 HIER kommt dein Underground Code hin
-      const viewer = this.viewer;
+    // 👉 HIER kommt dein Underground Code hin
+    const viewer = this.viewer;
 
-      // 🌍 Terrain durchsichtig machen
-      viewer.scene.globe.translucency.enabled = false;
-      viewer.scene.globe.translucency.frontFaceAlpha = 0.5;
-      viewer.scene.globe.translucency.backFaceAlpha = 0.5;
+    // 🌍 Terrain durchsichtig machen
+    viewer.scene.globe.translucency.enabled = false;
+    viewer.scene.globe.translucency.frontFaceAlpha = 0.5;
+    viewer.scene.globe.translucency.backFaceAlpha = 0.5;
 
-      // 👁 Objekte unter Terrain sichtbar machen
-      viewer.scene.globe.depthTestAgainstTerrain = false;
+    // 👁 Objekte unter Terrain sichtbar machen
+    viewer.scene.globe.depthTestAgainstTerrain = false;
 
-      // 🚀 Kamera darf durch Terrain
-      viewer.scene.screenSpaceCameraController.enableCollisionDetection = false;
+    // 🚀 Kamera darf durch Terrain
+    viewer.scene.screenSpaceCameraController.enableCollisionDetection = false;
 
-      // ❌ keine echte Sonnenbeleuchtung mehr
-      //viewer.scene.globe.enableLighting = false;
-      //viewer.scene.skyAtmosphere.show = false;
-      //viewer.scene.fog.enabled = false;
-      viewer.scene.skyBox = undefined;
-      viewer.scene.backgroundColor = Cesium.Color.GREY;
-      //viewer.scene.highDynamicRange = false;
-      //viewer.scene.gamma = 1.5; // oder 1.8 testen
-      viewer.imageryLayers.get(0).brightness = 1.3;
-      viewer.imageryLayers.get(0).contrast = 1.1;
+    // ❌ keine echte Sonnenbeleuchtung mehr
+    // Define default scene settings
+    viewer.scene.globe.enableLighting = false;
+    viewer.scene.skyAtmosphere.show = false;
+    viewer.scene.fog.enabled = false;
+    viewer.scene.skyBox = undefined;
+    viewer.scene.backgroundColor = Cesium.Color.GREY;
+    viewer.scene.highDynamicRange = false;
+    viewer.scene.gamma = 1.5; // oder 1.8 testen
+    viewer.imageryLayers.get(0).brightness = 1.3;
+    viewer.imageryLayers.get(0).contrast = 1.1;
 
-
-
-      // Add a red point at Bern, Switzerland
-      viewer.entities.add({
-        position: Cesium.Cartesian3.fromDegrees(7.44, 46.95, -1000),
-        point: {
-          pixelSize: 10,
-          color: Cesium.Color.RED
-        }
-      });
+    // Add a red point at Bern, Switzerland
+    viewer.entities.add({
+      position: Cesium.Cartesian3.fromDegrees(7.44, 46.95, -1000),
+      point: {
+        pixelSize: 10,
+        color: Cesium.Color.RED,
+      },
+    });
 
     return this.viewer;
   }
@@ -73,60 +72,60 @@ class CesiumService {
     return this.viewer;
   }
 
-  // 
-setLighting(enabled: boolean) {
-  const viewer = this.getViewer();
-  viewer.scene.globe.enableLighting = enabled;
-}
+  // Lighting and Scene Settings
+  setLighting(enabled: boolean) {
+    const viewer = this.getViewer();
+    viewer.scene.globe.enableLighting = enabled;
+  }
 
-setAtmosphere(enabled: boolean) {
-  const viewer = this.getViewer();
-  viewer.scene.skyAtmosphere.show = enabled;
-}
+  setAtmosphere(enabled: boolean) {
+    const viewer = this.getViewer();
+    viewer.scene.skyAtmosphere.show = enabled;
+  }
 
-setFog(enabled: boolean) {
-  const viewer = this.getViewer();
-  viewer.scene.fog.enabled = enabled;
-}
+  setFog(enabled: boolean) {
+    const viewer = this.getViewer();
+    viewer.scene.fog.enabled = enabled;
+  }
 
-setFogStrength(value: number) {
-  const viewer = this.getViewer();
-  viewer.scene.fog.density = value;
-}
+  setFogStrength(value: number) {
+    const viewer = this.getViewer();
+    viewer.scene.fog.density = value;
+  }
 
-setHDR(enabled: boolean) {
-  const viewer = this.getViewer();
-  viewer.scene.highDynamicRange = enabled;
-}
+  setHDR(enabled: boolean) {
+    const viewer = this.getViewer();
+    viewer.scene.highDynamicRange = enabled;
+  }
 
-setGamma(value: number) {
-  const viewer = this.getViewer();
-  viewer.scene.gamma = value;
-}
+  setGamma(value: number) {
+    const viewer = this.getViewer();
+    viewer.scene.gamma = value;
+  }
 
-setBrightness(value: number) {
-  const viewer = this.getViewer();
-  const layer = viewer.imageryLayers.get(0);
-  if (layer) layer.brightness = value;
-}
+  setBrightness(value: number) {
+    const viewer = this.getViewer();
+    const layer = viewer.imageryLayers.get(0);
+    if (layer) layer.brightness = value;
+  }
 
-setContrast(value: number) {
-  const viewer = this.getViewer();
-  const layer = viewer.imageryLayers.get(0);
-  if (layer) layer.contrast = value;
-}
+  setContrast(value: number) {
+    const viewer = this.getViewer();
+    const layer = viewer.imageryLayers.get(0);
+    if (layer) layer.contrast = value;
+  }
 
   // 🎯 CAMERA ACTIONS
 
   flyToBern() {
     this.getViewer().camera.flyTo({
-      destination: Cesium.Cartesian3.fromDegrees(7.4474, 46.9480, 15000)
+      destination: Cesium.Cartesian3.fromDegrees(7.4474, 46.948, 15000),
     });
   }
 
   flyToNewYork() {
     this.getViewer().camera.flyTo({
-      destination: Cesium.Cartesian3.fromDegrees(-74.0060, 40.7128, 20000)
+      destination: Cesium.Cartesian3.fromDegrees(-74.006, 40.7128, 20000),
     });
   }
 

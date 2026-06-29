@@ -1,8 +1,10 @@
-html, body {
+/* Global styles for the application */
+
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
   overflow: hidden;
-  color: red;
 }

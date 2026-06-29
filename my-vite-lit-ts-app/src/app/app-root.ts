@@ -1,13 +1,17 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-import '@/components/cesium-viewer';
 import { cesiumService } from '@/cesium/cesium-service';
+
+import '@/components/cesium-viewer';
 import '@/components/lighting-controls';
+
+// My-Components
+import '@/components/my-component';
+import '@/components/my-inner-slot-component';
 
 @customElement('app-root')
 export class AppRoot extends LitElement {
-
   createRenderRoot() {
     return this;
   }
@@ -20,41 +24,36 @@ export class AppRoot extends LitElement {
 
       <div class="layout">
         <aside class="sidebar">
-
           <h4>Camera Controls</h4>
 
-          <button @click=${() => cesiumService.flyToBern()}>
-            Fly to Bern 🇨🇭
-          </button>
+          <button @click=${() => cesiumService.flyToBern()}>Fly to Bern 🇨🇭</button>
 
-          <button @click=${() => cesiumService.flyToNewYork()}>
-            Fly to New York 🗽
-          </button>
+          <button @click=${() => cesiumService.flyToNewYork()}>Fly to New York 🗽</button>
 
           <hr />
 
-          <button @click=${() => cesiumService.zoomIn()}>
-            Zoom In +
-          </button>
+          <button @click=${() => cesiumService.zoomIn()}>Zoom In +</button>
 
-          <button @click=${() => cesiumService.zoomOut()}>
-            Zoom Out -
-          </button>
+          <button @click=${() => cesiumService.zoomOut()}>Zoom Out -</button>
 
           <hr />
 
-          <button @click=${() => cesiumService.rotateLeft()}>
-            Rotate Left ⟲
-          </button>
+          <button @click=${() => cesiumService.rotateLeft()}>Rotate Left ⟲</button>
 
-          <button @click=${() => cesiumService.rotateRight()}>
-            Rotate Right ⟳
-          </button>
-
+          <button @click=${() => cesiumService.rotateRight()}>Rotate Right ⟳</button>
         </aside>
 
         <main class="map">
           <cesium-viewer></cesium-viewer>
+
+          <!-- My-Components -->
+          <div>
+            <my-component>
+              <my-inner-slot-component></my-inner-slot-component>
+            </my-component>
+          </div>
+
+          <lighting-controls></lighting-controls>
         </main>
       </div>
 
