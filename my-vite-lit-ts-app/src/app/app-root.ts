@@ -1,10 +1,14 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-import '@/components/cesium-viewer';
 import { cesiumService } from '@/cesium/cesium-service';
+
+import '@/components/cesium-viewer';
 import '@/components/lighting-controls';
+
+// My-Components
 import '@/components/my-component';
+import '@/components/my-inner-slot-component';
 
 @customElement('app-root')
 export class AppRoot extends LitElement {
@@ -17,10 +21,6 @@ export class AppRoot extends LitElement {
       <header>
         <h3>Cesium GIS</h3>
       </header>
-
-      <div>
-        <my-component></my-component>
-      </div>
 
       <div class="layout">
         <aside class="sidebar">
@@ -45,6 +45,15 @@ export class AppRoot extends LitElement {
 
         <main class="map">
           <cesium-viewer></cesium-viewer>
+
+          <!-- My-Components -->
+          <div>
+            <my-component>
+              <my-inner-slot-component></my-inner-slot-component>
+            </my-component>
+          </div>
+
+          <lighting-controls></lighting-controls>
         </main>
       </div>
 

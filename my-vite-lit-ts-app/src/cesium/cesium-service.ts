@@ -44,13 +44,14 @@ class CesiumService {
     viewer.scene.screenSpaceCameraController.enableCollisionDetection = false;
 
     // ❌ keine echte Sonnenbeleuchtung mehr
-    //viewer.scene.globe.enableLighting = false;
-    //viewer.scene.skyAtmosphere.show = false;
-    //viewer.scene.fog.enabled = false;
+    // Define default scene settings
+    viewer.scene.globe.enableLighting = false;
+    viewer.scene.skyAtmosphere.show = false;
+    viewer.scene.fog.enabled = false;
     viewer.scene.skyBox = undefined;
     viewer.scene.backgroundColor = Cesium.Color.GREY;
-    //viewer.scene.highDynamicRange = false;
-    //viewer.scene.gamma = 1.5; // oder 1.8 testen
+    viewer.scene.highDynamicRange = false;
+    viewer.scene.gamma = 1.5; // oder 1.8 testen
     viewer.imageryLayers.get(0).brightness = 1.3;
     viewer.imageryLayers.get(0).contrast = 1.1;
 

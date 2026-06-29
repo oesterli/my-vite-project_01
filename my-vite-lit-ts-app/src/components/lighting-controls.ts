@@ -1,15 +1,15 @@
-import { LitElement, html } from 'lit';
+import { LitElement, css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { cesiumService } from '@/cesium/cesium-service';
 
 @customElement('lighting-controls')
 export class LightingControls extends LitElement {
-  createRenderRoot() {
-    return this;
-  }
+  // createRenderRoot() {
+  //   return this;
+  // }
 
   @state() private x = 1230;
-  @state() private y = 80;
+  @state() private y = 400;
 
   @state() private dragging = false;
   private offsetX = 0;
@@ -41,6 +41,49 @@ export class LightingControls extends LitElement {
     window.removeEventListener('mousemove', this.onMouseMove);
     window.removeEventListener('mouseup', this.onMouseUp);
   };
+
+  static styles = css`
+    .panel {
+      position: absolute;
+      width: 260px;
+      background: #b2efb5;
+      color: black;
+      border-radius: 6px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      user-select: none;
+    }
+
+    .header {
+      background: #b5b4b490;
+      padding: 8px;
+      cursor: grab;
+      font-weight: bold;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+    }
+
+    .header:active {
+      cursor: grabbing;
+    }
+
+    .content {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #b2efb5;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      font-size: 12px;
+    }
+
+    input[type='range'] {
+      width: 100%;
+    }
+  `;
 
   render() {
     return html`
@@ -110,48 +153,6 @@ export class LightingControls extends LitElement {
           </label>
         </div>
       </div>
-
-      <style>
-        .panel {
-          position: absolute;
-          width: 260px;
-          background: #b2efb5;
-          color: black;
-          border-radius: 6px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-          user-select: none;
-        }
-
-        .header {
-          background: #111;
-          padding: 8px;
-          cursor: grab;
-          font-weight: bold;
-          border-top-left-radius: 6px;
-          border-top-right-radius: 6px;
-        }
-
-        .header:active {
-          cursor: grabbing;
-        }
-
-        .content {
-          padding: 10px;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        label {
-          display: flex;
-          flex-direction: column;
-          font-size: 12px;
-        }
-
-        input[type='range'] {
-          width: 100%;
-        }
-      </style>
     `;
   }
 }
