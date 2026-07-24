@@ -9,6 +9,8 @@ import '@/components/lighting-controls';
 // My-Components
 import '@/components/my-component';
 import '@/components/my-inner-slot-component';
+import '@/components/draggable-window';
+import '@/components/api-loader';
 
 @customElement('app-root')
 export class AppRoot extends LitElement {
@@ -54,6 +56,12 @@ export class AppRoot extends LitElement {
           </div>
 
           <lighting-controls></lighting-controls>
+
+          <!-- Floating, ziehbares Fenster -->
+          <draggable-window title="SwissGeol API Collections">
+            <!-- Deine API-Komponente als Slot-Inhalt -->
+            <api-loader></api-loader>
+          </draggable-window>
         </main>
       </div>
 

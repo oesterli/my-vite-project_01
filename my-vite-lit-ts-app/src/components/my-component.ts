@@ -89,7 +89,8 @@ export class MyComponent extends LitElement {
           <my-inner-component>
             <my-inner-slot-component></my-inner-slot-component>
           </my-inner-component>
-          <slot></slot>
+          <!-- <slot></slot> -->
+          <my-inner-slot-component></my-inner-slot-component>
         </div>
       </div>
     `;

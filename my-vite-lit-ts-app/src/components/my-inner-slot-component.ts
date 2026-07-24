@@ -1,6 +1,8 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 
+import { loggeText } from '../utils/logger';
+
 @customElement('my-inner-slot-component')
 export class MyInnerSlotComponent extends LitElement {
   // createRenderRoot() {
@@ -19,7 +21,18 @@ export class MyInnerSlotComponent extends LitElement {
     }
   `;
 
+  _handleClick() {
+    loggeText('Button wurde geklickt!');
+  }
+
+  firstUpdated() {
+    loggeText('Lit-Komponente wurde erfolgreich geladen.');
+  }
+
   render() {
-    return html` <div class="content-02">Hello from my-inner-slot-component.ts</div> `;
+    return html`
+      <div class="content-02">Hello from my-inner-slot-component.ts</div>
+      <button @click="${this._handleClick}">Klick mich</button>
+    `;
   }
 }
