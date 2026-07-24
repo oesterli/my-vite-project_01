@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, state, property } from 'lit/decorators.js';
 
 // Typendefinition für die OGC Collection (optional, aber typensicher)
 interface Collection {
@@ -16,6 +16,10 @@ interface ApiResponse {
 
 @customElement('api-loader')
 export class ApiLoader extends LitElement {
+  // 1. Offene Properties für den Login definieren (von außen setzbar)
+  @property({ type: String }) username = '';
+  @property({ type: String }) password = '';
+
   // Interne reaktive Zustände mit Type-Annotations
   @state()
   private _collections: Collection[] = [];
@@ -88,17 +92,30 @@ export class ApiLoader extends LitElement {
 
   private async _fetchCollections(): Promise<void> {
     //const url = 'https://ogc-api.gst-viewer.swissgeol.ch/collections';
+    // vite proxy configuration will redirect this to the actual API endpoint
     const url = '/api-swissgeol/collections';
 
     try {
       this._loading = true;
       this._error = null;
 
-      const response = await fetch(url, {
-        headers: {
-          Accept: 'application/json',
-        },
-      });
+      // 2. HTTP Header aufbauen
+      const headers: HeadersInit = {
+        Accept: 'application/json',
+      };
+
+      // 3. Wenn Zugangsdaten vorhanden sind, den Authorization Header ergänzen
+      if (this.username && this.password) {
+        // btoa() kodiert den String 'username:password' in Base64
+        const credentials = btoa(`${this.username}:${this.password}`);
+        headers['Authorization'] = `Basic ${credentials}`;
+      }
+
+      const response = await fetch(url, { headers });
+
+      if (response.status === 401) {
+        throw new Error('401 Unauthorized: Zugangsdaten falsch oder fehlend.');
+      }
 
       if (!response.ok) {
         throw new Error(`HTTP-Fehler! Status: ${response.status}`);

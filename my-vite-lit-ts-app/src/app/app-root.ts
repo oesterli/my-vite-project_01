@@ -1,21 +1,37 @@
 import { LitElement, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 
 import { cesiumService } from '@/cesium/cesium-service';
 
-import '@/components/cesium-viewer';
+//import '@/components/cesium-viewer';
 import '@/components/lighting-controls';
 
 // My-Components
 import '@/components/my-component';
 import '@/components/my-inner-slot-component';
+
 import '@/components/draggable-window';
-import '@/components/api-loader';
+import '@/components/simple-api-call';
+
+import '@/components/cesium-viewer-2';
 
 @customElement('app-root')
 export class AppRoot extends LitElement {
   createRenderRoot() {
     return this;
+  }
+
+  // 2. Zustand verwalten: Ist das Fenster offen oder zu?
+  @state() private _isWindowOpen = true;
+
+  // Methode zum Wiederöffnen
+  private _openWindow() {
+    this._isWindowOpen = true;
+  }
+
+  // Methode reagiert, wenn der Schließen-Button im Fenster geklickt wird
+  private _onWindowClosed() {
+    this._isWindowOpen = false;
   }
 
   render() {
@@ -26,6 +42,8 @@ export class AppRoot extends LitElement {
 
       <div class="layout">
         <aside class="sidebar">
+          <!-- Button zum Wiederöffnen des Fensters -->
+          <button class="open-btn" @click="${this._openWindow}">API-Fenster öffnen</button>
           <h4>Camera Controls</h4>
 
           <button @click=${() => cesiumService.flyToBern()}>Fly to Bern 🇨🇭</button>
@@ -46,7 +64,8 @@ export class AppRoot extends LitElement {
         </aside>
 
         <main class="map">
-          <cesium-viewer></cesium-viewer>
+          <!-- <cesium-viewer></cesium-viewer> -->
+          <cesium-viewer-2></cesium-viewer-2>
 
           <!-- My-Components -->
           <div>
@@ -58,9 +77,16 @@ export class AppRoot extends LitElement {
           <lighting-controls></lighting-controls>
 
           <!-- Floating, ziehbares Fenster -->
-          <draggable-window title="SwissGeol API Collections">
+          <draggable-window
+            title="SwissGeol API"
+            .open="${this._isWindowOpen}"
+            @window-closed="${this._onWindowClosed}"
+          >
             <!-- Deine API-Komponente als Slot-Inhalt -->
-            <api-loader></api-loader>
+            <simple-api-call
+              username="OGC-Seismics"
+              password="OGC-Seismics_2025*"
+            ></simple-api-call>
           </draggable-window>
         </main>
       </div>
