@@ -13,7 +13,7 @@ import '@/components/my-inner-slot-component';
 import '@/components/draggable-window';
 import '@/components/simple-api-call';
 
-import '@/components/cesium-viewer-2';
+import '@/components/cesium-viewer';
 
 @customElement('app-root')
 export class AppRoot extends LitElement {
@@ -65,7 +65,7 @@ export class AppRoot extends LitElement {
 
         <main class="map">
           <!-- <cesium-viewer></cesium-viewer> -->
-          <cesium-viewer-2></cesium-viewer-2>
+          <cesium-viewer></cesium-viewer>
 
           <!-- My-Components -->
           <div>
