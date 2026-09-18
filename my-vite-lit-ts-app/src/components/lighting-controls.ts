@@ -8,8 +8,8 @@ export class LightingControls extends LitElement {
   //   return this;
   // }
 
-  @state() private x = 1230;
-  @state() private y = 400;
+  @state() private x = 280;
+  @state() private y = 100;
 
   @state() private dragging = false;
   private offsetX = 0;
