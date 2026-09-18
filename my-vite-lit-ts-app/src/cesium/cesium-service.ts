@@ -1,7 +1,7 @@
 import * as Cesium from 'cesium';
 
 // Configuration of Cesium Ion access token
-Cesium.Ion.defaultAccessToken = //'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyYWIzMGU3MC1mN2E4LTQ3NTctOGI3ZS1iM2I3NTY0YjdlZjMiLCJpZCI6MjQ3NDAyLCJpYXQiOjE3MzQ3MjQ2Mjd9.QMRjFVXRyPBA1HlQzTy-KLRvO_fuPEN5AHmvWb2WE5U'
+Cesium.Ion.defaultAccessToken =
   import.meta.env.VITE_CESIUM_ION_ACCESS_TOKEN;
 
 class CesiumService {
