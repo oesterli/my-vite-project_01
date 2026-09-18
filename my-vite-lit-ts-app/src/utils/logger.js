@@ -2,9 +2,15 @@
 
 let logCounter = 0;
 
-export function loggeText(text) {
+export function loggeText(text, component = '') {
   logCounter++;
 
-  console.log(`[Logger ${logCounter}] ${text}`);
+  const logText =
+    `[${logCounter}]${component ? ` [${component}]` : ''} ${text}`;
+
+
+  console.log(logText);
   //console.log('OGC API Loader initialized');
+
+  return logText;
 }
