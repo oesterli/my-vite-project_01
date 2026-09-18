@@ -1,5 +1,9 @@
 import * as Cesium from 'cesium';
 
+// Configuration of Cesium Ion access token
+Cesium.Ion.defaultAccessToken = //'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyYWIzMGU3MC1mN2E4LTQ3NTctOGI3ZS1iM2I3NTY0YjdlZjMiLCJpZCI6MjQ3NDAyLCJpYXQiOjE3MzQ3MjQ2Mjd9.QMRjFVXRyPBA1HlQzTy-KLRvO_fuPEN5AHmvWb2WE5U'
+  import.meta.env.VITE_CESIUM_ION_ACCESS_TOKEN;
+
 class CesiumService {
   private static instance: CesiumService;
   private viewer?: Cesium.Viewer;
@@ -14,8 +18,14 @@ class CesiumService {
   init(containerId: string) {
     if (this.viewer) return this.viewer;
 
+    // OSM Imagery Provider
+    const osm = new Cesium.OpenStreetMapImageryProvider({
+      url: 'https://tile.openstreetmap.org/',
+    });
+
     this.viewer = new Cesium.Viewer(containerId, {
       terrain: Cesium.Terrain.fromWorldTerrain(), // 🔥 wichtig für echtes Terrain
+      //terrain: terrainProvider, // 🔥 wichtig für echtes Terrain
 
       animation: false,
       timeline: false,
@@ -27,6 +37,8 @@ class CesiumService {
       fullscreenButton: false,
       infoBox: false,
       selectionIndicator: false,
+      //baseLayer: new Cesium.ImageryLayer(osm),
+      baseLayer: Cesium.ImageryLayer.fromWorldImagery()
     });
 
     // 👉 HIER kommt dein Underground Code hin

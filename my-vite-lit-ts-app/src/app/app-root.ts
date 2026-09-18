@@ -22,7 +22,7 @@ export class AppRoot extends LitElement {
   }
 
   // 2. Zustand verwalten: Ist das Fenster offen oder zu?
-  @state() private _isWindowOpen = true;
+  @state() private _isWindowOpen = false;
 
   // Methode zum Wiederöffnen
   private _openWindow() {
