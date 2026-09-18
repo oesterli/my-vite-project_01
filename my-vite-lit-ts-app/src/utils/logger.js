@@ -1,5 +1,10 @@
 // logger.js
+
+let logCounter = 0;
+
 export function loggeText(text) {
-  console.log(`[Logger]: ${text}`);
+  logCounter++;
+
+  console.log(`[Logger ${logCounter}] ${text}`);
   //console.log('OGC API Loader initialized');
 }
